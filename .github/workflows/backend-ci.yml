@@ -22,4 +22,15 @@ jobs:
           java-version: '25'
 
       - name: Build backend
-        run: mvn clean package
+        run: ./mvnw clean package
+
+      - name: Build Docker image
+        run: docker build -t marathon-backend .
+
+      - name: Run Docker container
+        run: |
+          docker run -d -p 8080:8080 --name backend-test marathon-backend
+          sleep 10
+
+      - name: Test API endpoint
+        run: curl http://localhost:8080/api/marathons
