@@ -22,7 +22,7 @@ jobs:
           java-version: '25'
 
       - name: Build backend
-        run: mvw clean package
+        run: mvn clean package
 
       - name: Build Docker image
         run: docker build -t marathon-backend .
