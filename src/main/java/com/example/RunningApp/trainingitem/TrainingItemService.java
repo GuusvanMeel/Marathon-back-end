@@ -1,4 +1,4 @@
-package com.example.Marathon.trainingitem;
+package com.example.RunningApp.trainingitem;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,7 +12,7 @@ public class TrainingItemService {
     @Autowired
     TrainingItemRepository repo;
 
-    public List<TrainingItem> GetAll() {
+    public List<TrainingItem> getAll() {
     return repo.findAll();
     }
     

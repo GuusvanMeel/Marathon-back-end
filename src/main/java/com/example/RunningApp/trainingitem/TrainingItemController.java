@@ -1,4 +1,4 @@
-package com.example.Marathon.trainingitem;
+package com.example.RunningApp.trainingitem;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,9 +16,9 @@ public class TrainingItemController {
         this.service = service;
     }
 
-    @GetMapping("/test")
-    public List<TrainingItem> test() {
-        return service.GetAll();
+    @GetMapping
+    public List<TrainingItem> getAll() {
+        return service.getAll();
     }
 
     @GetMapping("/{id}/item")

@@ -1,4 +1,4 @@
-package com.example.Marathon.trainingplan;
+package com.example.RunningApp.trainingplan;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;

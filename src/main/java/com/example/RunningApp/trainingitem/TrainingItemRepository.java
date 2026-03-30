@@ -1,4 +1,4 @@
-package com.example.Marathon.trainingitem;
+package com.example.RunningApp.trainingitem;
 
 import java.util.List;
 import java.util.UUID;

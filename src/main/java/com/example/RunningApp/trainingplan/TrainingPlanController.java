@@ -1,4 +1,4 @@
-package com.example.Marathon.trainingplan;
+package com.example.RunningApp.trainingplan;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ public class TrainingPlanController {
     public TrainingPlanController(TrainingPlanService service) {
         this.service = service;
     }
-    @GetMapping("/test")
-    public List<TrainingPlan> test(){
-        return service.GetAll();
+    @GetMapping
+    public List<TrainingPlan> getAll(){
+        return service.getAll();
     }
 
     

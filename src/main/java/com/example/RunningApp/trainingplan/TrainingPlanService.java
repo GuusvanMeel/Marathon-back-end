@@ -1,4 +1,4 @@
-package com.example.Marathon.trainingplan;
+package com.example.RunningApp.trainingplan;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class TrainingPlanService {
     TrainingPlanRepository repo;
 
    
-   public List<TrainingPlan> GetAll() {
+   public List<TrainingPlan> getAll() {
     return repo.findAll();
 }
 }

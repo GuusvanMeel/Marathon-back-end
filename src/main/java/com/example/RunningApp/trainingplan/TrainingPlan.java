@@ -1,4 +1,4 @@
-package com.example.Marathon.trainingplan;
+package com.example.RunningApp.trainingplan;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
