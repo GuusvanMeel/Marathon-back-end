@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.example.RunningApp.trainingitem.dto.TrainingItemListDTO;
+
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/trainingitems")
@@ -22,8 +24,9 @@ public class TrainingItemController {
     }
 
     @GetMapping("/{id}/item")
-    public List<TrainingItem> getByTrainingPlanID(@PathVariable UUID id) {
+    public List<TrainingItemListDTO> getByTrainingPlanID(@PathVariable UUID id) {
         return service.getByTrainingPlanID(id);
                 
     }
+    
 }
