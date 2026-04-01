@@ -1,9 +1,13 @@
 package com.example.RunningApp.trainingplan;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.RunningApp.marathon.MarathonRepository;
+import com.example.RunningApp.trainingplan.dto.TrainingPlanListDTO;
 
 
 @Service
@@ -11,9 +15,25 @@ public class TrainingPlanService {
 
     @Autowired
     TrainingPlanRepository repo;
+    @Autowired
+    MarathonRepository Mrepo;
 
    
-   public List<TrainingPlan> getAll() {
-    return repo.findAll();
+   public List<TrainingPlanListDTO> getAll() {
+    List<TrainingPlan> plans =  repo.findAll();
+    List<TrainingPlanListDTO> dtos = new ArrayList<>();
+    for (TrainingPlan p : plans) {
+        TrainingPlanListDTO dto = new TrainingPlanListDTO();
+
+        dto.setId(p.getId().toString());
+        dto.setMarathonName(Mrepo.getReferenceById(p.getMarathonId()).getName());
+        dto.setEndDate(p.getEndDate().toString());
+        dto.setStartDate(p.getStartDate().toString());
+        dto.setStatus(p.getStatus());
+        dtos.add(dto);
+    }
+    return dtos;
+
+
 }
 }
