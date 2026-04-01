@@ -8,18 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.RunningApp.trainingitem.dto.TrainingItemListDTO;
-import com.example.RunningApp.trainingplan.TrainingPlanRepository;
-import com.example.RunningApp.marathon.MarathonRepository;
 
 @Service
 public class TrainingItemService {
 
     @Autowired
     TrainingItemRepository repo;
-    @Autowired
-    MarathonRepository Mrepo;
-    @Autowired
-    TrainingPlanRepository Trepo;
+    
 
     public List<TrainingItem> getAll() {
         return repo.findAll();
@@ -34,7 +29,6 @@ public class TrainingItemService {
         }
         for (TrainingItem trainingItem : items) {
             TrainingItemListDTO dto = new TrainingItemListDTO();
-            dto.setId(trainingItem.getId().toString());
             dto.setActualDistance(trainingItem.getActualDistance());
             dto.setActualTime( // hier moet nog logica komen om er goede string van te maken voor de frontend
                     trainingItem.getActualTime() != null
@@ -45,11 +39,6 @@ public class TrainingItemService {
             dto.setTargetDistance(trainingItem.getTargetDistance());
             dto.setTargetTime(trainingItem.getTargetTime().toString());// IDEM
 
-            // Hier word de naam van de marathon achterhaald door calls naar de marathon en
-            // plan repo's
-            dto.setMarathonName(
-                    Mrepo.getReferenceById(Trepo.getReferenceById(trainingItem.getTrainingPlanId()).getMarathonId())
-                            .getName());
 
             dtos.add(dto);
         }

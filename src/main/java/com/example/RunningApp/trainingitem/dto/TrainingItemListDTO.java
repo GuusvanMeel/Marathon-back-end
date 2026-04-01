@@ -2,7 +2,6 @@ package com.example.RunningApp.trainingitem.dto;
 
 public class TrainingItemListDTO {
 
-    private String id;
     private String date;
 
     private Double targetDistance;
@@ -13,17 +12,9 @@ public class TrainingItemListDTO {
 
     private String status;
 
-    private String marathonName;
 
     // 🔹 getters & setters
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getDate() {
         return date;
@@ -73,11 +64,4 @@ public class TrainingItemListDTO {
         this.status = status;
     }
 
-    public String getMarathonName() {
-        return marathonName;
-    }
-
-    public void setMarathonName(String marathonName) {
-        this.marathonName = marathonName;
-    }
 }
