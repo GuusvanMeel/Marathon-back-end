@@ -2,6 +2,8 @@ package com.example.RunningApp.trainingplan;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.RunningApp.trainingplan.dto.TrainingPlanListDTO;
@@ -21,9 +23,8 @@ public class TrainingPlanController {
     public List<TrainingPlanListDTO> getAll() {
         return service.getAll();
     }
-
     @PostMapping
-    public void createTrainingPlan(@RequestBody TrainingPlanInputForm dto) {
+    public ResponseEntity<Void> createTrainingPlan(@RequestBody TrainingPlanInputForm dto) {
 
         String GREEN = "\u001B[32m";
         String CYAN = "\u001B[36m";
@@ -40,8 +41,16 @@ public class TrainingPlanController {
         System.out.println(CYAN + "---------------------------" + RESET);
 
         service.CreatePlan(dto);
+        return ResponseEntity.ok().build();
 
 
     }
+    @ExceptionHandler(jakarta.persistence.EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public void handleNotFound() {}
+
+    @ExceptionHandler(org.springframework.http.converter.HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void handleBadRequest() {}
 
 }

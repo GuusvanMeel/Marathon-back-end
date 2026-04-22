@@ -3,8 +3,10 @@ package com.example.RunningApp.trainingplan;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+import com.example.RunningApp.marathon.Marathon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,19 +31,31 @@ public class TrainingPlanService {
     List<TrainingPlan> plans =  repo.findAll();
     List<TrainingPlanListDTO> dtos = new ArrayList<>();
     for (TrainingPlan p : plans) {
+        System.out.println("PLAN ID: " + p.getId());
+        System.out.println("MARATHON ID: " + p.getMarathonId());
+
+        Optional<Marathon> optionalMarathon = Mrepo.findById(p.getMarathonId());
+        System.out.println("FOUND? " + optionalMarathon.isPresent());
+
+        Marathon refMarathon = Mrepo.getReferenceById(p.getMarathonId());
+        System.out.println("REF NAME: " + refMarathon.getName());
+
+        if (optionalMarathon.isPresent()) {
+            System.out.println("FIND NAME: " + optionalMarathon.get().getName());
+        }
         TrainingPlanListDTO dto = new TrainingPlanListDTO();
 
         dto.setId(p.getId().toString());
-        dto.setMarathonName(Mrepo.getReferenceById(p.getMarathonId()).getName());
+        Marathon marathon = Mrepo.findById(p.getMarathonId())
+                .orElseThrow(() -> new RuntimeException("Marathon not found"));
+
+        dto.setMarathonName(marathon.getName());
         dto.setEndDate(p.getEndDate().toString());
         dto.setStartDate(p.getStartDate().toString());
         dto.setStatus(p.getStatus());
         dtos.add(dto);
     }
     return dtos;
-    
-
-
 }
     public void CreatePlan(TrainingPlanInputForm data){
         
