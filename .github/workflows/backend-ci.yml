@@ -23,7 +23,9 @@ jobs:
 
       - name: Build backend
         run: mvn clean package
-        
+      
+      - name: Debug username
+        run: 'echo "User is: ${{ secrets.DOCKER_USERNAME }}"'
 
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest .
