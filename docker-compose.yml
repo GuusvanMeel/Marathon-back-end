@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: marathon-db
+    environment:
+      POSTGRES_DB: Marathon_DB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Stepkapsom.4
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    image: guusvanmeel/marathon-backend:latest
+    container_name: marathon-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/Marathon_DB
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: Stepkapsom.4
+
+volumes:
+  postgres_data:
