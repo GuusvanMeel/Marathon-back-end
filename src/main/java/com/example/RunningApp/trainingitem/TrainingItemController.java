@@ -18,13 +18,14 @@ public class TrainingItemController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping //GET
     public List<TrainingItem> getAll() {
         return service.getAll();
     }
 
-    @GetMapping("/{id}/item")
+    @GetMapping("/{id}/item") //GET{ID}
     public List<TrainingItemListDTO> getByTrainingPlanID(@PathVariable UUID id) {
+        
         return service.getByTrainingPlanID(id);
                 
     }

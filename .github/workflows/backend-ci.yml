@@ -25,12 +25,19 @@ jobs:
         run: mvn clean package
 
       - name: Build Docker image
-        run: docker build -t marathon-backend .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest .
 
       - name: Run Docker container
         run: |
-          docker run -d -p 8080:8080 --name backend-test marathon-backend
+          docker run -d -p 8080:8080 --name backend-test ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest
           sleep 10
 
       - name: Test API endpoint
         run: curl http://localhost:8080/api/marathons
+
+      
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest

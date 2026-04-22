@@ -2,8 +2,13 @@ package com.example.RunningApp.trainingitem;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.Duration;
 import java.util.UUID;
+
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+
 
 @Entity
 @Table(name = "training_items")
@@ -13,23 +18,26 @@ public class TrainingItem {
     @GeneratedValue
     private UUID id;
 
-    // 🔗 FK naar training_plan
     @Column(name = "training_plan_id")
     private UUID trainingPlanId;
 
     private LocalDate date;
 
     @Column(name = "target_distance")
+    
     private Double targetDistance;
 
     @Column(name = "actual_distance")
+   
     private Double actualDistance;
 
     @Column(name = "target_time")
-    private LocalTime targetTime;
+    @JdbcTypeCode(SqlTypes.INTERVAL_SECOND)
+    private Duration targetTime;
 
     @Column(name = "actual_time")
-    private LocalTime actualTime;
+     @JdbcTypeCode(SqlTypes.INTERVAL_SECOND)
+    private Duration actualTime;
 
     private String status;
 
@@ -50,11 +58,11 @@ public class TrainingItem {
     public Double getActualDistance() { return actualDistance; }
     public void setActualDistance(Double actualDistance) { this.actualDistance = actualDistance; }
 
-    public LocalTime getTargetTime() { return targetTime; }
-    public void setTargetTime(LocalTime targetTime) { this.targetTime = targetTime; }
+    public Duration getTargetTime() { return targetTime; }
+    public void setTargetTime(Duration targetTime) { this.targetTime = targetTime; }
 
-    public LocalTime getActualTime() { return actualTime; }
-    public void setActualTime(LocalTime actualTime) { this.actualTime = actualTime; }
+    public Duration getActualTime() { return actualTime; }
+    public void setActualTime(Duration actualTime) { this.actualTime = actualTime; }
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }

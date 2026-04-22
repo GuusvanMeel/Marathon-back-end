@@ -1,7 +1,10 @@
 package com.example.RunningApp.trainingitem.dto;
 
+import java.util.UUID;
+
 public class TrainingItemListDTO {
 
+    private UUID id;
     private String date;
 
     private Double targetDistance;
@@ -15,7 +18,12 @@ public class TrainingItemListDTO {
 
     // 🔹 getters & setters
 
-
+    public UUID GetId(){
+        return id;
+    }
+    public void setID(UUID id){
+        this.id = id;
+    }
     public String getDate() {
         return date;
     }
