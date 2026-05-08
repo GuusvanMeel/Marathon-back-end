@@ -67,7 +67,7 @@ public class TrainingItemController {
 
         return ResponseEntity.ok("Notification sent");
     }
-    public static void sendNotification(String message) {
+    public void sendNotification(String message) {
         for (SseEmitter emitter : emitters) {
             try {
                 emitter.send(SseEmitter.event()
