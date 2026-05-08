@@ -1,5 +1,6 @@
 package com.example.RunningApp.marathon;
 
+import org.hibernate.event.spi.EventSource;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -18,4 +19,5 @@ public class MarathonController {
     public List<Marathon> getAllMarathons() {
         return marathonRepository.findAll();
     }
+
 }

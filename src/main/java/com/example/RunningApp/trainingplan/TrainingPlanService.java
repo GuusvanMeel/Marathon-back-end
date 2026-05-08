@@ -31,23 +31,13 @@ public class TrainingPlanService {
     List<TrainingPlan> plans =  repo.findAll();
     List<TrainingPlanListDTO> dtos = new ArrayList<>();
     for (TrainingPlan p : plans) {
-        System.out.println("PLAN ID: " + p.getId());
-        System.out.println("MARATHON ID: " + p.getMarathonId());
 
         Optional<Marathon> optionalMarathon = Mrepo.findById(p.getMarathonId());
-        System.out.println("FOUND? " + optionalMarathon.isPresent());
-
-        Marathon refMarathon = Mrepo.getReferenceById(p.getMarathonId());
-        System.out.println("REF NAME: " + refMarathon.getName());
-
-        if (optionalMarathon.isPresent()) {
-            System.out.println("FIND NAME: " + optionalMarathon.get().getName());
-        }
         TrainingPlanListDTO dto = new TrainingPlanListDTO();
 
         dto.setId(p.getId().toString());
         Marathon marathon = Mrepo.findById(p.getMarathonId())
-                .orElseThrow(() -> new RuntimeException("Marathon not found"));
+                .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Marathon not found"));
 
         dto.setMarathonName(marathon.getName());
         dto.setEndDate(p.getEndDate().toString());

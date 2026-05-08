@@ -41,7 +41,7 @@ public class TrainingPlanController {
         System.out.println(CYAN + "---------------------------" + RESET);
 
         service.CreatePlan(dto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
 
 
     }
