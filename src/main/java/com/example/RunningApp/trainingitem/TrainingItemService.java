@@ -24,7 +24,7 @@ public class TrainingItemService {
     public List<TrainingItem> getAll() {
         return repo.findAll();
     }
-
+    public TrainingItem Save(TrainingItem item){repo.save(item); return item;}
     public List<TrainingItemListDTO> getByTrainingPlanID(UUID id) {
 
         List<TrainingItemListDTO> dtos = new ArrayList<>();

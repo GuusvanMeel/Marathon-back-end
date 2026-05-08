@@ -1,6 +1,8 @@
 package com.example.RunningApp.trainingitem;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -77,5 +79,27 @@ public class TrainingItemController {
                 emitters.remove(emitter);
             }
         }
+    }
+    @PostMapping("/test-create-today/{trainingPlanId}")
+    public ResponseEntity<TrainingItem> createTestTrainingItemForToday(
+            @PathVariable UUID trainingPlanId
+    ) {
+
+        TrainingItem item = new TrainingItem();
+
+        item.setTrainingPlanId(trainingPlanId);
+        item.setDate(LocalDate.now());
+
+        item.setTargetDistance(5.0);
+        item.setActualDistance(0.0);
+
+        item.setTargetTime(Duration.ofMinutes(30));
+        item.setActualTime(Duration.ZERO);
+
+        item.setStatus("PLANNED");
+
+        TrainingItem savedItem = service.Save(item);
+
+        return ResponseEntity.ok(savedItem);
     }
 }
