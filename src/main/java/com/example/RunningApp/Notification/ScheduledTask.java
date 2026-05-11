@@ -12,7 +12,7 @@ public class ScheduledTask {
         this.notificationService = notificationService;
     }
 
-    @Scheduled(fixedRate = 2000)
+    @Scheduled(cron = "0 0 8 * * *")
     public void runDaily() {
 
         notificationService.sendTodayTrainingReminders();
