@@ -1,6 +1,7 @@
 package com.example.RunningApp.trainingitem;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,4 +79,7 @@ public class TrainingItemService {
 
     return String.format("%d:%02d", hours, minutes);
 }
+    public List<TrainingItem> getTodayTrainingItems() {
+        return repo.findByDate(LocalDate.now());
+    }
 }

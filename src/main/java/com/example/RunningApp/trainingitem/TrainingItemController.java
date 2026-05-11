@@ -37,49 +37,6 @@ public class TrainingItemController {
         return service.getByTrainingPlanID(id);
                 
     }
-    private final Collection<SseEmitter> emitters = new CopyOnWriteArrayList<>();
-
-    @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public SseEmitter streamSseEvents() {
-
-        SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
-
-        emitter.onCompletion(() -> emitters.remove(emitter));
-        emitter.onTimeout(() -> emitters.remove(emitter));
-        emitter.onError(throwable -> {
-            emitters.remove(emitter);
-            emitter.completeWithError(throwable);
-        });
-
-        emitters.add(emitter);
-
-        return emitter;
-    }
-    @GetMapping("/test-notification")
-    public ResponseEntity<String> sendTestNotification() {
-        for (SseEmitter emitter : emitters) {
-            try {
-                emitter.send(SseEmitter.event()
-                        .name("training-notification")
-                        .data("Test notificatie vanuit Spring Boot"));
-            } catch (IOException e) {
-                emitters.remove(emitter);
-            }
-        }
-
-        return ResponseEntity.ok("Notification sent");
-    }
-    public void sendNotification(String message) {
-        for (SseEmitter emitter : emitters) {
-            try {
-                emitter.send(SseEmitter.event()
-                        .name("training-notification")
-                        .data(message));
-            } catch (IOException e) {
-                emitters.remove(emitter);
-            }
-        }
-    }
     @PostMapping("/test-create-today/{trainingPlanId}")
     public ResponseEntity<TrainingItem> createTestTrainingItemForToday(
             @PathVariable UUID trainingPlanId
@@ -102,4 +59,5 @@ public class TrainingItemController {
 
         return ResponseEntity.ok(savedItem);
     }
+
 }
