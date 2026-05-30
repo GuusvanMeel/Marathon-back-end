@@ -19,11 +19,23 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '25'
+      
+      - name: Build backend
+        run: mvn clean package -DskipTests
   docker-test:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+      
       - name: Build backend
         run: mvn clean package -DskipTests
 
@@ -49,6 +61,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+
+      - name: Build backend
+        run: mvn clean package -DskipTests
+
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest .
 
@@ -57,3 +78,5 @@ jobs:
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest
+
+So for now:
