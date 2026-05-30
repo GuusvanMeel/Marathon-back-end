@@ -41,7 +41,7 @@ jobs:
         run: curl http://localhost:8080/api/marathons
 
       
-        docker-publish:
+  docker-publish:
     needs: docker-test
     runs-on: ubuntu-latest
     if: github.ref_name == 'main'
