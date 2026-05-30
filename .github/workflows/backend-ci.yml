@@ -68,7 +68,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: backend-jar
-          path: targets
+          path: target
 
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest .
