@@ -20,11 +20,11 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '25'
-
   docker-test:
     needs: build
     runs-on: ubuntu-latest
 
+    steps:
       - name: Build backend
         run: mvn clean package -DskipTests
 
@@ -41,7 +41,7 @@ jobs:
         run: curl http://localhost:8080/api/marathons
 
       
-  docker-publish:
+        docker-publish:
     needs: docker-test
     runs-on: ubuntu-latest
     if: github.ref_name == 'main'
