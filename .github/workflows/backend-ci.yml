@@ -23,7 +23,7 @@ jobs:
       - name: Build backend
         run: mvn clean package -DskipTests
       
-          - name: Upload backend artifact
+      - name: Upload backend artifact
         uses: actions/upload-artifact@v4
         with:
           name: backend-jar
