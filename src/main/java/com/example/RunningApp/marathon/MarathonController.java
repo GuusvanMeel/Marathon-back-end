@@ -6,7 +6,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/marathons")
-@CrossOrigin(origins = "http://localhost:5173") // voor je Vue frontend
+@CrossOrigin(origins = "http://localhost:5173")
 public class MarathonController {
 
     private final MarathonRepository marathonRepository;
