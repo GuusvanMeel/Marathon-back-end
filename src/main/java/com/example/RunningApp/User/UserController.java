@@ -1,5 +1,7 @@
 package com.example.RunningApp.User;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +26,13 @@ public class UserController {
     public List<User> getUsers() {
         return userRepository.findAll();
     }
-       @GetMapping("/hash")
-    public String hashPassword() {
-        return new BCryptPasswordEncoder().encode("test123");
+    @GetMapping("/me")
+public ResponseEntity<String> getCurrentUser(Authentication authentication) {
+    if (authentication == null || !authentication.isAuthenticated()) {
+        return ResponseEntity.status(401).build();
     }
+
+    return ResponseEntity.ok(authentication.getName());
+}
+    
 }
