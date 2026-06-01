@@ -40,7 +40,7 @@ public class TrainingPlanController {
 
         System.out.println(CYAN + "---------------------------" + RESET);
 
-        service.CreatePlan(dto);
+        service.createPlan(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
 
 
