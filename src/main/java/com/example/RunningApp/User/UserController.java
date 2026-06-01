@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.persistence.PostUpdate;
@@ -17,6 +18,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
     private final UserRepository userRepository;
+        private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -25,6 +27,10 @@ public class UserController {
     @GetMapping
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+      @GetMapping("/hash")
+        public String hashPassword(@RequestParam String password) {
+        return encoder.encode(password);
     }
     @GetMapping("/me")
 public ResponseEntity<String> getCurrentUser(Authentication authentication) {
