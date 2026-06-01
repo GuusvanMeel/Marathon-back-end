@@ -23,13 +23,20 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .successHandler((request, response, authentication) -> {
-                            response.setStatus(200);
-                        })
-                        .failureHandler((request, response, exception) -> {
-                            response.setStatus(401);
-                        })
-                )
+        .loginProcessingUrl("/login")
+        .successHandler((request, response, authentication) -> {
+            response.setStatus(200);
+        })
+        .failureHandler((request, response, exception) -> {
+            response.setStatus(401);
+        })
+        .permitAll()
+)
+.exceptionHandling(exception -> exception
+        .authenticationEntryPoint((request, response, authException) -> {
+            response.setStatus(401);
+        })
+)
                 .logout(logout -> logout
                         .logoutSuccessHandler((request, response, authentication) -> {
                             response.setStatus(200);
