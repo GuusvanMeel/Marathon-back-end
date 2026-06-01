@@ -18,7 +18,6 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
     private final UserRepository userRepository;
-        private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -28,9 +27,9 @@ public class UserController {
     public List<User> getUsers() {
         return userRepository.findAll();
     }
-      @GetMapping("/hash")
-        public String hashPassword(@RequestParam String password) {
-        return encoder.encode(password);
+     @GetMapping("/hash")
+    public String hashPassword() {
+        return new BCryptPasswordEncoder().encode("test");
     }
     @GetMapping("/me")
 public ResponseEntity<String> getCurrentUser(Authentication authentication) {
