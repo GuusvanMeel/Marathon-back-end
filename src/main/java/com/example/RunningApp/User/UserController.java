@@ -1,9 +1,12 @@
 package com.example.RunningApp.User;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.persistence.PostUpdate;
 
 import java.util.List;
 
@@ -20,5 +23,9 @@ public class UserController {
     @GetMapping
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+       @GetMapping("/hash")
+    public String hashPassword() {
+        return new BCryptPasswordEncoder().encode("test123");
     }
 }
