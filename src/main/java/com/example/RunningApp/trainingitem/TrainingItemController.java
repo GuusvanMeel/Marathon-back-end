@@ -1,19 +1,13 @@
 package com.example.RunningApp.trainingitem;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.RunningApp.trainingitem.dto.TrainingItemListDTO;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
