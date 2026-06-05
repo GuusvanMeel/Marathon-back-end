@@ -55,7 +55,6 @@ public class NotificationService {
                     + " km";
 
             BroadcastNotification(message);
-            break; //omdat er tijdens testen meerdere trainingen per dag zijn, dus dan krijg je veel meer notifications dan verwacht.
         }
     }
 
