@@ -23,6 +23,9 @@
         <java.version>25</java.version>
     </properties>
     <dependencies>
+    <properties>
+  <sonar.organization>guusvanmeel</sonar.organization>
+</properties>
         <!-- Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
