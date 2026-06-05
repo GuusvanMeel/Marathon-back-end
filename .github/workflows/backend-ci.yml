@@ -77,7 +77,9 @@ jobs:
           path: target
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest .
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: docker build -t "$DOCKER_USERNAME/marathon-backend:latest" .
           
       - name: Run Docker container
         env:
@@ -129,4 +131,6 @@ jobs:
         run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: docker push "$DOCKER_USERNAME/marathon-backend:latest"
