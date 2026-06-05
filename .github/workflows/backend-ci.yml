@@ -48,7 +48,11 @@ jobs:
       - name: Run Docker container
       
         run: |
-          docker run -d -p 8080:8080 --name backend-test ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest
+          docker run -d -p 8080:8080 --name backend-test \
+            -e DB_URL="${{ secrets.DB_URL }}" \
+            -e DB_USERNAME="${{ secrets.DB_USERNAME }}" \
+            -e DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+            ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest
           sleep 10
           
       - name: Show containers
