@@ -122,7 +122,9 @@ jobs:
           path: target
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest .
+        env:
+            DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: docker build -t "$DOCKER_USERNAME/marathon-backend:latest" .
 
       - name: Log in to Docker Hub
         env:
