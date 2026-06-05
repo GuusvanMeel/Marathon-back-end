@@ -5,6 +5,7 @@ services:
     image: postgres:15
     container_name: marathon-db
     environment:
+      
       POSTGRES_DB: Marathon_DB
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -21,6 +22,7 @@ services:
     depends_on:
       - db
     environment:
+      SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: ${DB_URL}
       SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
