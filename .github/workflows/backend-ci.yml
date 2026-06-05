@@ -50,6 +50,13 @@ jobs:
         run: |
           docker run -d -p 8080:8080 --name backend-test ${{ secrets.DOCKER_USERNAME }}/marathon-backend:latest
           sleep 10
+          
+      - name: Show containers
+
+        run: docker ps -a
+
+      - name: Show backend logs
+        run: docker logs backend-test
 
       - name: Test API endpoint
         run: curl http://localhost:8080/api/marathons
