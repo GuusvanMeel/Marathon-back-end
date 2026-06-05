@@ -4,7 +4,7 @@
   "scripts": {
     "localstart": "mvnw spring-boot:run",
     "dev": "docker-compose up",
-    "start": "docker-compose pull && docker-compose up -d",
+    "start": "docker compose --env-file .env.docker pull && docker compose --env-file .env.docker up -d",
     "stop": "docker-compose down",
     "restart": "docker-compose down && docker-compose up -d",
     "logs": "docker-compose logs -f"
