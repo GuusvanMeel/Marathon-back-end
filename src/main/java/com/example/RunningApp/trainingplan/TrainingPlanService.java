@@ -8,9 +8,13 @@ import java.util.UUID;
 import com.example.RunningApp.Security.SecurityUtils;
 import com.example.RunningApp.marathon.Marathon;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.example.RunningApp.marathon.MarathonRepository;
 import com.example.RunningApp.trainingitem.TrainingItemService;
 import com.example.RunningApp.trainingplan.dto.TrainingPlanListDTO;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class TrainingPlanService {
@@ -49,15 +53,18 @@ public class TrainingPlanService {
         }
         return dtos;
     }
-
+    @Transactional
     public void createPlan(TrainingPlanInputForm data) {
         UUID currentUserId = securityUtils.getCurrentUserId();
+
+            Marathon marathon = mRepo.findById(data.getMarathonId())
+            .orElseThrow(() -> new EntityNotFoundException("Marathon not found"));
 
         TrainingPlan plan = new TrainingPlan();
         plan.setMarathonId(data.getMarathonId());
         plan.setStartDate(LocalDate.now());
         plan.setStatus("ONGOING");
-        plan.setEndDate(mRepo.getReferenceById(data.getMarathonId()).getDate());
+        plan.setEndDate(marathon.getDate());
         plan.setUserId(currentUserId); // was hardcoded UUID, nu dynamisch
         repo.save(plan);
         itemService.generateItems(plan, data);
