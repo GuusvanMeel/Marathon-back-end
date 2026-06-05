@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost"})
 public class UserController {
     private final UserRepository userRepository;
 

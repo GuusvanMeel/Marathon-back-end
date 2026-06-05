@@ -5,7 +5,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/marathons")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost"})
 public class MarathonController {
 
     private final MarathonRepository marathonRepository;

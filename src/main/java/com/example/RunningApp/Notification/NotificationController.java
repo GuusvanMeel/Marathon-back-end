@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
-@CrossOrigin(origins = "http://localhost:5173")
-@RestController
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost"})@RestController
 @RequestMapping("/notifications")
 public class NotificationController {
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.RunningApp.trainingplan.dto.TrainingPlanListDTO;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost"})
 @RestController
 @RequestMapping("/trainingplans")
 public class TrainingPlanController {

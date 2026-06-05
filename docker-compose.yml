@@ -26,6 +26,15 @@ services:
       SPRING_DATASOURCE_URL: ${DB_URL}
       SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      
+  frontend:
+    image: guusvanmeel/marathon-frontend:latest
+    container_name: marathon-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
 
 volumes:
   postgres_data:
