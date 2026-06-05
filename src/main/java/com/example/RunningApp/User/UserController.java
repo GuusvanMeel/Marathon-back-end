@@ -24,10 +24,7 @@ public class UserController {
     public List<User> getUsers() {
         return userRepository.findAll();
     }
-     @GetMapping("/hash")
-    public String hashPassword() {
-        return new BCryptPasswordEncoder().encode("test123");
-    }
+    
     @GetMapping("/me")
 public ResponseEntity<String> getCurrentUser(Authentication authentication) {
     if (authentication == null || !authentication.isAuthenticated()) {
