@@ -151,3 +151,13 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         run: docker push "$DOCKER_USERNAME/marathon-backend:latest"
+      - name: Trigger integration tests
+        if: github.ref_name == 'main'
+        env:
+          GH_TOKEN: ${{ secrets.INTEGRATION_REPO_TOKEN }}
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            https://api.github.com/repos/GuusvanMeel/Marathon-Integration/dispatches \
+            -d '{"event_type":"run-e2e"}'
